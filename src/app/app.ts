@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
+import { Header } from './header/header';
 import { ProfileCard } from './profile-card/profile-card';
+import { Skills } from './skills/skills';
+import { Footer } from './footer/footer';
+import { Proficiency } from './proficiency';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [ProfileCard],
+  imports: [Header, ProfileCard, Skills, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
   fullName = 'Graciela Gozum';
   location = 'Angeles City';
@@ -25,11 +29,18 @@ export class App {
     'Angular'
   ];
 
-  message = 'Welcome to my profile!';
-  clickCount = 0;
+    proficiencies: Proficiency[] = [
+    { tool: 'Visual Studio Code', level: 'Advanced' },
+    { tool: 'Git and GitHub', level: 'Intermediate' },
+    { tool: 'Node.js and npm', level: 'Intermediate' },
+    { tool: 'Angular CLI', level: 'Beginner' }
+  ];
 
-  showMessage() {
-    this.clickCount++;
-    this.message = `You clicked the button ${this.clickCount} time(s).`;
+
+  message = 'Click any skill above to select it.';
+
+  // Runs when the Skills component emits a skillSelected event.
+  onSkillSelected(skill: string) {
+    this.message = `You selected: ${skill}`;
   }
 }
